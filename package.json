@@ -1,0 +1,31 @@
+{
+  "name": "test-task-invoice-parse",
+  "version": "1.0.0",
+  "description": "Invoice parsing service",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/multipart": "^9.0.3",
+    "fastify": "^5.2.2",
+    "fastify-multipart": "^5.3.1",
+    "xlsx": "^0.18.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@vitest/coverage-v8": "^3.1.1",
+    "formdata-node": "^6.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1"
+  }
+}
