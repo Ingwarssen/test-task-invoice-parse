@@ -6,7 +6,7 @@ export async function healthcheckRoutes(server: FastifyInstance) {
     const { name, age } = request.query as { name?: string; age?: string };
 
     return {
-      message: "Hello World",
+      status: "ok",
       queryParams: {
         name,
         age: age ? parseInt(age) : undefined,

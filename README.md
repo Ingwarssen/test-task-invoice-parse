@@ -1,13 +1,22 @@
-# Invoice Parse Service
+# Invoice Parser API
 
-A Fastify-based service for parsing invoices, built with TypeScript.
+A Fastify-based API for parsing Excel invoice files with currency conversion capabilities.
+
+## Features
+
+- Parse Excel files with invoice data
+- Convert currencies using provided exchange rates
+- Validate invoice data against schema
+- Health check endpoint
+- TypeScript support
+- Unit and E2E tests
 
 ## Prerequisites
 
 - Node.js 18 or higher
-- npm (comes with Node.js)
+- npm or yarn
 
-## Setup
+## Installation
 
 1. Clone the repository
 2. Install dependencies:
@@ -17,38 +26,84 @@ A Fastify-based service for parsing invoices, built with TypeScript.
 
 ## Development
 
-To run the development server with hot-reloading:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-The server will start on `http://localhost:3000`
+## Testing
 
-## Available Scripts
+Run unit tests:
 
-- `npm run dev` - Start development server with hot-reloading
-- `npm run build` - Build the TypeScript project
-- `npm start` - Start the production server
+```bash
+npm test
+```
+
+Run tests coverage:
+
+```bash
+npm run test:coverage
+```
 
 ## API Endpoints
 
 ### POST /parse
 
-A basic endpoint for invoice parsing.
+Parse an Excel file with invoice data.
 
-Example request:
+**Query Parameters:**
 
-```bash
-curl -X POST http://localhost:3000/parse
+- `invoicingMonth` (required): The month of invoicing in YYYY-MM format
+
+**Request Body:**
+
+- `file`: Excel file with invoice data
+
+**Response:**
+
+```json
+{
+  "invoicingMonth": "2023-09",
+  "currencyRates": {
+    "USD": 1.1,
+    "EUR": 1.3,
+    "UAH": 0.027
+  },
+  "invoicesData": [
+    {
+      "Status": "READY",
+      "Item Price Currency": "USD",
+      "Invoice Currency": "EUR",
+      "Invoice Total Price": 100
+    }
+  ]
+}
 ```
 
-Example response:
+### GET /health
+
+Health check endpoint.
+
+**Response:**
+
+```json
+{
+  "status": "ok"
+}
+```
 
 ## Project Structure
 
-- `src/` - Source code directory
-  - `server.ts` - Main server file
-- `dist/` - Compiled JavaScript output (created after build)
-- `tsconfig.json` - TypeScript configuration
-- `package.json` - Project dependencies and scripts
+```
+src/
+├── routes/           # API routes
+├── utils/           # Utility functions
+├── schemas/         # Zod schemas
+├── plugins/         # Fastify plugins
+└── server.ts        # Server configuration
+```
+
+## License
+
+MIT
